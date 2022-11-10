@@ -1,0 +1,192 @@
+<div style="z-index: 999;   position: relative;">
+    <h1 id="title" class="title">Register</h1>
+
+    <nb-alert *ngIf="showMessages.error && errors?.length && !submitted" outline="danger" role="alert">
+    <p class="alert-title"><b>Oh snap!</b></p>
+    <ul class="alert-message-list">
+        <li *ngFor="let error of errors" class="alert-message">{{ error }}</li>
+    </ul>
+    </nb-alert>
+
+    <nb-alert *ngIf="showMessages.success && messages?.length && !submitted" outline="success" role="alert">
+    <p class="alert-title"><b>Hooray!</b></p>
+    <ul class="alert-message-list">
+        <li *ngFor="let message of messages" class="alert-message">{{ message }}</li>
+    </ul>
+    </nb-alert>
+
+    <form (ngSubmit)="register()" #form="ngForm" aria-labelledby="title">
+
+    <div class="form-control-group row">
+        <mat-form-field class="col-md-12" appearance="fill">
+            <mat-label>Full Name</mat-label>
+            <input matInput  [(ngModel)]="user.fullName"
+            #fullName="ngModel"
+            id="input-name"
+            name="fullName"
+            placeholder="Full name"
+            autofocus
+            fullWidth
+            [required]="getConfigValue('forms.validation.fullName.required')"
+            [minlength]="getConfigValue('forms.validation.fullName.minLength')"
+            [maxlength]="getConfigValue('forms.validation.fullName.maxLength')"
+            [attr.aria-invalid]="fullName.invalid && fullName.touched ? true : null">
+        </mat-form-field>
+        
+        <ng-container *ngIf="fullName.invalid && fullName.touched">
+        <p class="error-message" *ngIf="fullName.errors?.required">
+            Full name is required!
+        </p>
+        <p class="error-message" *ngIf="fullName.errors?.minlength || fullName.errors?.maxlength">
+            Full name should contains
+            from {{getConfigValue('forms.validation.fullName.minLength')}}
+            to {{getConfigValue('forms.validation.fullName.maxLength')}}
+            characters
+        </p>
+        </ng-container>
+    </div>
+    <div class="form-control-group row">
+        <mat-form-field class="col-md-12" appearance="fill">
+            <mat-label>username</mat-label>
+            <input matInput  [(ngModel)]="user.username"
+            #username="ngModel"
+            id="input-name"
+            name="username"
+            placeholder="Usuario"
+            autofocus
+            fullWidth required>
+        </mat-form-field>
+    </div>
+
+    <div class="form-control-group row">
+        <mat-form-field class="col-md-12" appearance="fill">
+            <mat-label>teléfono</mat-label>
+            <input matInput  [(ngModel)]="user.phone"
+            #phone="ngModel"
+            id="input-name"
+            name="phone"
+            placeholder="Teléfono"
+            autofocus
+            fullWidth required>
+        </mat-form-field>
+    </div>
+
+    <div class="form-control-group row">
+        <mat-form-field class="col-md-12" appearance="fill">
+            <mat-label>Email Address:</mat-label>
+            <input matInput 
+            [(ngModel)]="user.email"
+            #email="ngModel"
+            id="input-email"
+            name="email"
+            pattern=".+@.+..+"
+            placeholder="Email address"
+            fullWidth
+            [required]="getConfigValue('forms.validation.email.required')"
+            [attr.aria-invalid]="email.invalid && email.touched ? true : null">
+        </mat-form-field>
+        
+        <ng-container *ngIf="email.invalid && email.touched">
+        <p class="error-message" *ngIf="email.errors?.required">
+            Email is required!
+        </p>
+        <p class="error-message" *ngIf="email.errors?.pattern">
+            Email should be the real one!
+        </p>
+        </ng-container>
+    </div>
+
+    <div class="form-control-group row">
+
+        <mat-form-field class="col-md-12" appearance="fill">
+            <mat-label>Password:</mat-label>
+            <input matInput 
+            type="password"
+            id="input-password"
+            name="password"
+            placeholder="Password"
+            fullWidth
+            [required]="getConfigValue('forms.validation.password.required')"
+            >
+        </mat-form-field>
+        <!-- [attr.aria-invalid]="password.invalid && password.touched ? true : null"
+        *ngIf="password.invalid && password.touched" -->
+        <!-- <ng-container >
+        <p class="error-message" *ngIf="password.errors?.required">
+            Password is required!
+        </p>
+        </ng-container> -->
+    </div>
+
+    <div class="form-control-group row">
+        <mat-form-field class="col-md-12" appearance="fill">
+            <mat-label>Repeat password:</mat-label>
+            <input matInput [(ngModel)]="user.confirmPassword"
+            #rePass="ngModel"
+            type="password"
+            id="input-re-password"
+            name="rePass"
+            placeholder="Confirm Password"
+            fullWidth
+            [required]="getConfigValue('forms.validation.password.required')"
+            [attr.aria-invalid]="rePass.invalid && rePass.touched ? true : null">
+        </mat-form-field>
+        
+        <ng-container *ngIf="rePass.invalid && rePass.touched">
+        <p class="error-message" *ngIf="rePass.errors?.required">
+            Password confirmation is required!
+        </p>
+        <!-- //*ngIf="password.value != rePass.value && !rePass.errors?.required" -->
+        <p class="error-message" >
+            Password does not match the confirm password.
+        </p>
+        </ng-container>
+    </div>
+
+
+    <div class="form-control-group row m-0">
+        <mat-form-field class="w-100" appearance="fill">
+            <mat-label>Dirección</mat-label>
+            <textarea matInput ></textarea>
+        </mat-form-field>
+    </div>
+
+
+    <div class="form-control-group row m-0">
+        <mat-form-field class="w-100" appearance="fill">
+        <mat-label>Tipo de usuario:</mat-label>
+        <mat-select>
+            <mat-option  value="1">Empresa</mat-option>
+            <mat-option  value="2">Postulante</mat-option>
+        </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="form-control-group row m-0">
+        <mat-form-field class="w-100" appearance="fill">
+        <mat-label>Categoría de interés:</mat-label>
+        <mat-select>
+            <mat-option  value="1">Empresa</mat-option>
+        </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="form-control-group accept-group" *ngIf="getConfigValue('forms.register.terms')">
+        <nb-checkbox name="terms" [(ngModel)]="user.terms" [required]="getConfigValue('forms.register.terms')">
+        Agree to <a href="#" target="_blank"><strong>Terms & Conditions</strong></a>
+        </nb-checkbox>
+    </div>
+
+    <button nbButton
+            fullWidth
+            status="success"
+            [disabled]="submitted || !form.valid"
+            [class.btn-pulse]="submitted">
+        Register
+    </button>
+    </form>
+
+
+
+    <section class="another-action" aria-label="Sign in">
+    Already have an account? <a class="text-link" routerLink="../login">Log in</a>
+    </section>
+</div>

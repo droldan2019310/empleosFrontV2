@@ -1,0 +1,46 @@
+<div class="w-100 shadowB pt-2 mb-2 row m-0 justify-content-center">
+    <div class="col-md-12 text-center col-xxxl-12">
+        <h1>AGREGAR EMPLEO</h1>
+    </div>
+    <div class="col-md-12 col-xxxl-12 row text-center pt-2 pb-2">
+        <mat-form-field class="col-md-4 col-xxxl-12" appearance="fill">
+            <mat-label>Nombre de la Empresa</mat-label>
+            <input matInput>
+        </mat-form-field>
+        <mat-form-field class="col-md-4 col-xxxl-12" appearance="fill">
+            <mat-label>No plazas Disponibles</mat-label>
+            <input matInput>
+        </mat-form-field>
+        <mat-form-field class="col-md-4 col-xxxl-12" appearance="fill">
+            <mat-label>Horario laboral</mat-label>
+            <input matInput>
+        </mat-form-field>
+        <mat-form-field class="col-md-6 col-xxxl-12" appearance="fill">
+            <mat-label>Descripción del empleo</mat-label>
+            <textarea matInput ></textarea>
+        </mat-form-field>
+        <mat-form-field class="col-md-6 col-xxxl-12" appearance="fill">
+            <mat-label>Requerimientos</mat-label>
+            <textarea matInput ></textarea>
+        </mat-form-field>
+        <mat-form-field class="col-md-12 col-xxxl-12" appearance="fill">
+            <mat-label>Educación:</mat-label>
+            <textarea matInput placeholder="Trata de exigir lo menos posible en educación y se más especifico en habilidades"></textarea>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="col-md-12 col-xxxl-12">
+            <mat-label>Categoría</mat-label>
+            <mat-select>
+              <mat-option value="1">
+                Categoría  1
+              </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <button nbButton
+            class="col-md-12"
+            status="success"
+            
+            [class.btn-pulse]="true">
+            Register
+        </button>
+    </div>
+</div>
